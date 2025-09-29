@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhanced Product Catalog</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
+        h2 { text-align: center; color: #333; }
+        select, input { padding: 5px 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        ul { list-style: none; padding: 0; }
+        li { background-color: #fff; margin: 5px 0; padding: 12px; border-radius: 6px;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.2s; }
+        li:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: scale(1.02); }
+        .chip { display: inline-block; padding: 5px 10px; margin: 2px; background: #ddd; border-radius: 16px; }
+    </style>
+</head>
+<body ng-controller="Ctrl">
+    <h2>Enhanced Product Catalog</h2>
+    
+    <input type="text" ng-model="searchText" placeholder="Search products..." />
+    <select ng-model="cat">
+        <option value="">All Categories</option>
+        <option ng-repeat="c in categories">{{c}}</option>
+    </select>
+    
+    <ul>
+        <li ng-repeat="p in products | filter:{category: cat} | filter:searchText">
+            {{p.name}} - {{p.category}} - ${{p.price}}
+        </li>
+    </ul>
+
+    <script>
+        angular.module('app', [])
+        .controller('Ctrl', function($scope, $http){
+            // Fetch categories dynamically
+            $scope.categories = [];
+            $scope.products = [];
+
+          
+            $http.get('https://api.example.com/products')
+                .then(function(response){
+                    $scope.products = response.data.products;
+                    $scope.categories = [...new Set(response.data.products.map(p => p.category))];
+                }).catch(function(){
+                    console.error("Error fetching data from API");
+                });
+        });
+    </script>
+</body>
+</html>
