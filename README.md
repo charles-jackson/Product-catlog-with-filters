@@ -1,5 +1,5 @@
 PRODUCT CATALOG WITH FILTERS:
-
+******************************
 
 Product Catalog (AngularJS):
        A simple **Product Catalog application** built with **AngularJS 1.x**.  
