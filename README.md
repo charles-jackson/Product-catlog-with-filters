@@ -3,8 +3,9 @@ PRODUCT CATALOG WITH FILTERS:
 
 Product Catalog (AngularJS):
        A simple **Product Catalog application** built with **AngularJS 1.x**.  
-This project demonstrates how to display and filter a list of products by category using AngularJS data binding and filters.
+This project demonstrates how to display and filter a list of products by category using AngularJS data binding and filters. 
 
+------------------------------------------
 
 
 1) Features
